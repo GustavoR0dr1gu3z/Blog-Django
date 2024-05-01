@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.views.generic.base import View
 
-# Create your views here.
+class bienvenidaAdmin(View):
+    def get(self, response):
+        return HttpResponse(
+            content="Hola soy gustavo"
+        )
