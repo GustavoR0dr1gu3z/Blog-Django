@@ -1,34 +1,32 @@
 from rest_framework.views import APIView
+from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from posts.models import Post
 from posts.api.serializers import PostSerializer
 
-class PostAPIView(APIView):
-    def get(self, request):        
-        #Array de los titulos de post
-        '''posts = [
-            post.title for post in Post.objects.all()
-        ]'''
 
+class PostViewSet(ViewSet):
+    def list(self, request):        
         serializerData = PostSerializer(
             Post.objects.all(), 
             many=True # Devolver array completo
         )
-
         return Response(            
             status  =   status.HTTP_200_OK, 
             data    =   serializerData.data
-
         )
     
-    def post(self, request):
-        '''Post.objects.create(
-            title=request.POST['title'],
-            description = request.POST['description'],
-            order = request.POST['order']
+    def retrieve(self, request, pk: int):
+        post = PostSerializer(
+            Post.objects.get(pk=pk)
         )
-        return self.get(request)'''
+        return Response(
+            status = status.HTTP_200_OK,
+            data = post.data
+        )
+    
+    def create(self, request):
         serializer = PostSerializer(
             data = request.POST
         )
@@ -41,6 +39,34 @@ class PostAPIView(APIView):
             status = status.HTTP_200_OK,
             data = serializer.data
         )
+
+'''class PostAPIView(APIView):
+    def get(self, request):        
+        serializerData = PostSerializer(
+            Post.objects.all(), 
+            many=True # Devolver array completo
+        )
+        return Response(            
+            status  =   status.HTTP_200_OK, 
+            data    =   serializerData.data
+
+        )
+    
+    def post(self, request):
+        serializer = PostSerializer(
+            data = request.POST
+        )
+        serializer.is_valid(
+            raise_exception = True
+        )
+        serializer.save()
+        
+        return Response(
+            status = status.HTTP_200_OK,
+            data = serializer.data
+        )'''
+
+
     
 
 
