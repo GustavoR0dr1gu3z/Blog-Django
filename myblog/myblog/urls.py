@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from posts.views import bienvenidaAdmin
+from posts.api.views import PostAPIView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mensaje/bienvenida', bienvenidaAdmin.as_view())
+    path('mensaje/bienvenida', bienvenidaAdmin.as_view()),
+
+    # API Pruebas
+    path('api/pruebas/posts', PostAPIView.as_view())
 ]
