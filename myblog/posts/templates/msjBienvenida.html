@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gustavo</title>
+</head>
+<body>
+    <h1>Hola, mi nombre es gustavo</h1>
+    <h3>Tus datos son:</h3>
+
+    <p>Tu nombre es: {{name}}</p>
+    <p>Tu erdad es:  {{year}} años</p>
+    <p>Tus lenguajes son:</p>
+    <ul>
+        {% for code in codes %}
+            <li>{{code}}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
