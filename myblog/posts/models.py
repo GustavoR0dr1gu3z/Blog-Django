@@ -5,3 +5,4 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     created_at = models.DateTimeField(auto_created=True)
+    order = models.IntegerField()
